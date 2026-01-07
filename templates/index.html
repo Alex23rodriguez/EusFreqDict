@@ -1,38 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Word Lookup</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Word Lookup</h1>
 
     <form id="form">
-        <input
-            type="text"
-            id="words"
-            placeholder="Enter words separated by spaces"
-            size="40"
-        />
-        <button type="submit">Submit</button>
+      <input
+        type="text"
+        id="words"
+        placeholder="Enter words separated by spaces"
+        size="40"
+      />
+      <button type="submit">Submit</button>
     </form>
 
     <pre id="output"></pre>
 
     <script>
-        const form = document.getElementById("form");
-        const output = document.getElementById("output");
+      const form = document.getElementById("form");
+      const output = document.getElementById("output");
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-            const words = document.getElementById("words").value;
+        const words = document.getElementById("words").value;
 
-            const response = await fetch(`/api/freq?words=${encodeURIComponent(words)}`);
-            const data = await response.json();
+        const response = await fetch(
+          `/api/freq?words=${encodeURIComponent(words)}`,
+        );
+        const data = await response.json();
 
-            output.textContent = JSON.stringify(data, null, 2);
-        });
+        output.textContent = JSON.stringify(data, null, 2);
+      });
     </script>
-</body>
+  </body>
 </html>
