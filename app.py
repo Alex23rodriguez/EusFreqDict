@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 
 from api import freq
 
-app = FastAPI()
+app = FastAPI(root_path="/freq")
 
 
 @app.get("/api/freq")
