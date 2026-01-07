@@ -8,7 +8,15 @@ def freq(words: str):
     return (
         data.filter(pl.col("word").is_in(words.split()))
         .select(
-            "index", "word", "freq", "k_low", "k_high", "k_low_total", "k_high_total"
+            "index",
+            "word",
+            "freq",
+            "k_low",
+            "k_high",
+            "k_low_total",
+            "k_high_total",
+            "morph",
+            "morph_eus",
         )
         .to_dicts()
     )
