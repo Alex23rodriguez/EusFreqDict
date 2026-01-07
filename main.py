@@ -1,11 +1,9 @@
-import polars as pl
+import uvicorn
 
-data = pl.read_parquet("./assets/data.parquet")
-
-
-def get(words):
-    return (
-        data.filter(pl.col("word").is_in(words.split()))
-        .select("word", "freq")
-        .to_dicts()
+if __name__ == "__main__":
+    uvicorn.run(
+        "run:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True,
     )
