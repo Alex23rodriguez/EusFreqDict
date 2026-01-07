@@ -28,7 +28,7 @@
 
             const words = document.getElementById("words").value;
 
-            const response = await fetch(`/api/get?words=${encodeURIComponent(words)}`);
+            const response = await fetch(`/api/freq?words=${encodeURIComponent(words)}`);
             const data = await response.json();
 
             output.textContent = JSON.stringify(data, null, 2);
