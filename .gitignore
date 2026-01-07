@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+
+# assets
+assets/*.csv
+
+# macOS
+.DS_Store
+
