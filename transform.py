@@ -1,7 +1,8 @@
+from pathlib import Path
 from pprint import pprint
 
 import polars as pl
-from polars import col
+from polars import col, lit
 
 # %%
 data = pl.read_csv("./assets/above_average.csv")
@@ -81,6 +82,38 @@ t = (
 # %%
 df = df.join(t, on="amount", how="left")
 
+
+# %%
+# add morphological info
+eus_eng = {
+    "ize": "noun",
+    "ad1": "base_verb",
+    "ad2": "conj_verb",
+    "adj": "adjective",
+    "adb": "adverb",
+    "lok": "conjunction",
+    "zen": "quantifier",
+    "izr": "pronoun",
+    "era": "demonstrative",
+    "gal": "interrogative",
+}
+
+# %%
+morph = {}
+for f in Path("./assets/morph").iterdir():
+    t = pl.read_csv(f)
+    m = f.stem
+
+    morph[m] = t.select(
+        "word", lit(m).alias("morph_eus"), lit(eus_eng[m]).alias("morph")
+    )
+
+
+# %%
+morph_df = pl.concat(morph.values())
+
+# %%
+df = df.join(morph_df, on="word", how="left")
 
 # %%
 df.write_parquet("./assets/data.parquet")
