@@ -10,8 +10,10 @@ wheels/
 .venv
 
 # assets
-assets/*.csv
+assets/**/*.csv
 
 # macOS
 .DS_Store
 
+# misc
+pg.py
